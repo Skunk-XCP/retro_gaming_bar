@@ -5,7 +5,17 @@
 {% endblock %}
 
 {% block main %}
-    <p>BIENVENUE AU RETRO GAMING BAR ADMIN</p>
+    {#    La boucle permet d'afficher l'intégralité des articles #}
+{#    {% for article in article %}#}
+        </article>
+        <h1>{{ article.title }}</h1>
+        <p>{{ article.content }}</p>
+
+        <div class="lien">
+            <a href="{{ path ('admin_update_article',{'id':article.id }) }}">Modifier cet article </a>
+        </div>
+        </article>
+{#    {% endfor %}#}
 {% endblock %}
 
 {% block footer %}
