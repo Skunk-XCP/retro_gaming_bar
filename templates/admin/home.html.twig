@@ -1,23 +1,23 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block header %}
-    <p>ICI SE TROUVE LE HEADER</p>
-{% endblock %}
 
 {% block main %}
+
     {#    La boucle permet d'afficher l'intégralité des articles #}
-{#    {% for article in article %}#}
-        </article>
-        <h1>{{ article.title }}</h1>
-        <p>{{ article.content }}</p>
+    {% for article in lastArticles %}
+        <div class="description_bar">
+            <article class="main_page">
+               <h1>{{ article.title }}</h1>
+               <p>{{ article.content }}</p>
 
-        <div class="lien">
-            <a href="{{ path ('admin_update_article',{'id':article.id }) }}">Modifier cet article </a>
+            </article>
+            <div class="lien">
+                <a href="{{ path ('admin_update_article',{'id':article.id }) }}">Modifier cet article </a>
+            </div>
         </div>
-        </article>
-{#    {% endfor %}#}
+    {% endfor %}
+
 {% endblock %}
 
-{% block footer %}
-    <footer><p>ICI SE TROUVE LE FOOTER</p></footer>
-{% endblock %}
+
+

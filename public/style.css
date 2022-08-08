@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.top_nav {
+    background-color: black;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.test {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.li_nav {
+    color: white;
+    margin: 0 2% ;
+}
+
+
+.description_bar {
+    text-align: center;
+}
+
+.main_page {
+    border: black 2px solid;
+    margin: 23vh 15vw 3vh;
+}

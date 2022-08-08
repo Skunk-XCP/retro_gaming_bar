@@ -4,4 +4,17 @@
 
 {% block main %}
 
+    {% for staff in staffs %}
+        <div class="description_staff">
+            <article class="staff_page">
+                <h1>{{ staff.name }}</h1>
+                <p>{{ staff.description }}</p>
+
+            </article>
+            <div class="lien">
+                <a href="{{ path ('admin_update_article',{'id':staff.id }) }}">Modifier cet élément </a>
+            </div>
+        </div>
+    {% endfor %}
+
 {% endblock %}

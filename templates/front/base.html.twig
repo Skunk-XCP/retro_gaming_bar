@@ -5,9 +5,26 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ asset('style.css') }}">
     <title>RGB</title>
 </head>
 <body>
+
+{% block header %}
+    <nav class="top_nav">
+        <a href="{{ path ('admin_home') }}">
+            <span><img src="{{ asset ('../public/assets/images/logo_RGB_Final.png') }}" alt="logo RGB"></span>
+        </a>
+        <div class="div_nav">
+            <ul class="ul_nav">
+                <a href="{{ path ('admin_carte') }}" class="li_nav">La Carte</a>
+                <a href="{{ path ('admin_events') }}" class="li_nav">Events</a>
+                <a href="{{ path ('admin_staff') }}" class="li_nav">Le Staff</a>
+                <a href="{{ path ('admin_faq') }}" class="li_nav">FAQ</a>
+            </ul>
+        </div>
+    </nav>
+{% endblock %}
 
 {% block main %}
 {% endblock %}
