@@ -17,6 +17,16 @@
         </div>
     {% endfor %}
 
+    {% for picture in picture %}
+        <div class="home_pictures">
+            <section>
+                <img src="{{ asset('uploads/images/') ~ picture.name }}" alt="{{ picture.name }}">
+                <a href="{{ path ('admin_update_picture',{'id':picture.id }) }}">Modifier cette image </a>
+            </section>
+
+        </div>
+    {% endfor %}
+
 {% endblock %}
 
 

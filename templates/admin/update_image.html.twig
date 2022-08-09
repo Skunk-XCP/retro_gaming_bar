@@ -1,0 +1,20 @@
+{% extends 'Admin/base.html.twig' %}
+
+{% block main %}
+
+    {#
+    j'utilise la fonction twig form et je lui passe la variable qui contient
+    mon formulaire depuis le controleur
+    ça permet de générer tous les inputs + labels de mon formulaire
+    #}
+    {{ form_start(form) }}
+
+    {{ form_label(form.name, 'name', {'label_attr': {'class': 'form-picture-name-label'}}) }}
+    {{ form_widget(form.name, {'attr': {'class': 'form-picture-name-widget'}}) }}
+    {{ form_errors(form.name) }}
+
+    {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+
+    {{ form_end(form) }}
+
+{% endblock %}
