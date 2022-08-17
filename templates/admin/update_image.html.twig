@@ -1,13 +1,26 @@
 {% extends 'Admin/base.html.twig' %}
 
-{% block main %}
+{% block header %}
+    <nav class="top_nav">
+        <a href="{{ path ('admin_home') }}">
+            <span><img src="{{ asset ('../public/assets/images/logo_RGB_Final.png') }}" alt="logo RGB"></span>
+        </a>
+{% endblock %}
 
+
+{% block main %}
     {#
     j'utilise la fonction twig form et je lui passe la variable qui contient
     mon formulaire depuis le controleur
     ça permet de générer tous les inputs + labels de mon formulaire
     #}
     {{ form_start(form) }}
+
+    <div class="toto">
+        {% if picture.name %}
+            <img src="{{ asset('uploads/images/' ~ picture.name)  }}" alt="{{ picture.name }}">
+        {% endif %}
+    </div>
 
     {{ form_label(form.name, 'name', {'label_attr': {'class': 'form-picture-name-label'}}) }}
     {{ form_widget(form.name, {'attr': {'class': 'form-picture-name-widget'}}) }}
@@ -16,5 +29,8 @@
     {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
 
     {{ form_end(form) }}
+{% endblock %}
 
+
+{% block footer %}
 {% endblock %}

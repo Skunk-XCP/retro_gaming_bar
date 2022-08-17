@@ -18,17 +18,16 @@
         <a href="{{ path ('admin_home') }}">
             <span><img src="{{ asset ('../public/assets/images/logo_RGB_Final.png') }}" alt="logo RGB"></span>
         </a>
-        <div class="div_nav">
-            <ul class="ul_nav">
-                <div class="test">
-                    <a href="{{ path ('admin_carte') }}" class="li_nav">La Carte</a>
-                    <a href="{{ path ('admin_events') }}" class="li_nav">Events</a>
-                    <a href="{{ path ('admin_staff') }}" class="li_nav">Le Staff</a>
-                    <a href="{{ path ('admin_faq') }}" class="li_nav">FAQ</a>
-                </div>
-            </ul>
-        </div>
+        <ul class="ul_nav">
+            <li class="li_nav"><a href="{{ path ('admin_carte') }}" >La Carte</a></li>
+            <li class="li_nav"><a href="{{ path ('admin_events') }}">Events</a></li>
+            <li class="li_nav"><a href="{{ path ('admin_staff') }}" >Le Staff</a></li>
+            <li class="li_nav"><a href="{{ path ('admin_faq') }}" >FAQ</a></li>
+        </ul>
     </nav>
+    <div>
+        <img class="image_header" src="{{ asset ('../public/assets/images/image_header_alt_2.png') }}" alt="">
+    </div>
 {% endblock %}
 
 <main>
@@ -39,7 +38,13 @@
 </main>
 
 {% block footer %}
-    <footer><p>ICI SE TROUVE LE FOOTER</p></footer>
+    <footer class="footer">
+        <ul class="ul_footer">
+            <li class="li_footer"><a href=""></a>Mentions légales</li>
+            <li class="li_footer"><a href=""></a>Cookies</li>
+            <li class="li_footer"><a href="{{ path ('admin_faq') }}">FAQ</a></li>
+        </ul>
+    </footer>
 {% endblock %}
 
 </body>

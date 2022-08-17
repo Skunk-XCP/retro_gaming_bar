@@ -41,7 +41,7 @@ class AdminPictureController extends AbstractController
 
             $picture->setName($newFilename);
 
-            // alors on enregistre l'article en bdd
+            // alors on enregistre l'image en bdd
             $entityManager->persist($picture);
             $entityManager->flush();
 
@@ -66,15 +66,27 @@ class AdminPictureController extends AbstractController
         // on donne à la variable qui contient le formulaire
         // une instance de la classe request
         // pour que le formulaire puisse récupérer toutes les données
-        // des inputs et faire les setters sur  $article automatiquement
+        // des inputs et faire les setters sur $picture automatiquement
         $form->handleRequest($request);
 
 
         // si le formulaire a été posté et que les données sont valides (valeurs
-        // des inputs correspondent à ce qui est attendu en bdd pour la table article)
+        // des inputs correspondent à ce qui est attendu en bdd pour la table picture)
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // alors on enregistre l'article en bdd
+            $name = $form->get('name')->getData();
+
+            $originalFilename = pathinfo($name->getClientOriginalName(), PATHINFO_FILENAME);
+
+            $safeFilename = $slugger->slug($originalFilename);
+
+            $newFilename = $safeFilename . "-" . uniqid() . '.' . $name->guessExtension();
+
+            $name->move($this->getParameter('images_directory'), $newFilename);
+
+            $picture->setName($newFilename);
+
+            // alors on enregistre l'image en bdd
             $entityManager->persist($picture);
             $entityManager->flush();
 
@@ -84,6 +96,8 @@ class AdminPictureController extends AbstractController
         // j'affiche mon twig, en lui passant la variable
         // form, qui contient la vue du formulaire, c'est à dire,
         // le résultat de la méthode createView de la variable $form
-        return $this->render("admin/update_image.html.twig", ['form' => $form->createView(), 'picture' => $picture]);
+        return $this->render("admin/update_image.html.twig", [
+            'form' => $form->createView(),
+            'picture' => $picture]);
     }
 }

@@ -21,7 +21,7 @@ class AdminHomeController extends AbstractController
 
         $picture = $pictureRepository->findBy([], ['id' => 'DESC'], 3);
 
-        return $this->render('admin/home.html.twig',  [
+        return $this->render('admin/home.html.twig', [
             'lastArticles' => $lastArticles,
             'picture' => $picture
         ]);

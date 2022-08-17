@@ -1,13 +1,29 @@
 {% extends 'front/base.html.twig' %}
 
-{% block header %}
-    <p>ICI SE TROUVE LE HEADER</p>
-{% endblock %}
 
 {% block main %}
-    <p>ACCUEIL VISITEUR</p>
+
+    {#    La boucle permet d'afficher l'intégralité des articles #}
+    {% for article in lastArticles %}
+        <div class="description_bar">
+            <article class="main_page">
+                <h1>{{ article.title }}</h1>
+                <p>{{ article.content }}</p>
+
+            </article>
+        </div>
+    {% endfor %}
+
+    <section class="image_container">
+        {% for picture in picture %}
+            <div class="image_box">
+                <img class="img_home" src="{{ asset('uploads/images/') ~ picture.name }}" alt="{{ picture.name }}">
+
+            </div>
+
+        {% endfor %}
+    </section>
+
 {% endblock %}
 
-{% block footer %}
-    <footer><p>ICI SE TROUVE LE FOOTER</p></footer>
-{% endblock %}
+

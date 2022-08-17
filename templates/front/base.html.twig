@@ -5,6 +5,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
     <link rel="stylesheet" href="{{ asset('style.css') }}">
     <title>RGB</title>
 </head>
@@ -12,21 +15,36 @@
 
 {% block header %}
     <nav class="top_nav">
-        <a href="{{ path ('admin_home') }}">
+        <a href="{{ path ('home') }}">
             <span><img src="{{ asset ('../public/assets/images/logo_RGB_Final.png') }}" alt="logo RGB"></span>
         </a>
-        <div class="div_nav">
-            <ul class="ul_nav">
-                <a href="{{ path ('admin_carte') }}" class="li_nav">La Carte</a>
-                <a href="{{ path ('admin_events') }}" class="li_nav">Events</a>
-                <a href="{{ path ('admin_staff') }}" class="li_nav">Le Staff</a>
-                <a href="{{ path ('admin_faq') }}" class="li_nav">FAQ</a>
-            </ul>
-        </div>
+        <ul class="ul_nav">
+            <li class="li_nav"><a href="{{ path ('carte') }}" >La Carte</a></li>
+            <li class="li_nav"><a href="{{ path ('events') }}">Events</a></li>
+            <li class="li_nav"><a href="{{ path ('staff') }}" >Le Staff</a></li>
+            <li class="li_nav"><a href="{{ path ('faq') }}" >FAQ</a></li>
+        </ul>
     </nav>
+    <div>
+        <img class="image_header" src="{{ asset ('../public/assets/images/image_header_alt_2.png') }}" alt="">
+    </div>
 {% endblock %}
 
-{% block main %}
+<main>
+
+    {% block main %}
+    {% endblock %}
+
+</main>
+
+{% block footer %}
+    <footer class="footer">
+        <ul class="ul_footer">
+            <li class="li_footer"><a href=""></a>Mentions légales</li>
+            <li class="li_footer"><a href=""></a>Cookies</li>
+            <li class="li_footer"><a href="{{ path ('faq') }}">FAQ</a></li>
+        </ul>
+    </footer>
 {% endblock %}
 
 </body>

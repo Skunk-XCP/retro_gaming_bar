@@ -11,21 +11,24 @@
                <p>{{ article.content }}</p>
 
             </article>
-            <div class="lien">
-                <a href="{{ path ('admin_update_article',{'id':article.id }) }}">Modifier cet article </a>
+            <div class="lien_container">
+                <a class="btn_secondary" href="{{ path ('admin_update_article',{'id':article.id }) }}">Modifier cet article </a>
             </div>
         </div>
     {% endfor %}
 
-    {% for picture in picture %}
-        <div class="home_pictures">
-            <section>
-                <img src="{{ asset('uploads/images/') ~ picture.name }}" alt="{{ picture.name }}">
-                <a href="{{ path ('admin_update_picture',{'id':picture.id }) }}">Modifier cette image </a>
-            </section>
+    <section class="image_container">
+        {% for picture in picture %}
+            <div class="image_box">
+                <img class="img_home" src="{{ asset('uploads/images/') ~ picture.name }}" alt="{{ picture.name }}">
 
-        </div>
-    {% endfor %}
+                <div class="lien_container">
+                    <a class="btn_secondary" href="{{ path ('admin_update_picture',{'id':picture.id }) }}">Modifier cette image </a>
+                </div>
+             </div>
+
+        {% endfor %}
+    </section>
 
 {% endblock %}
 
