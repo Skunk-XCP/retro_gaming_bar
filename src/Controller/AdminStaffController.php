@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Staff;
+use App\Entity\Article;
 use App\Form\StaffType;
-use App\Repository\StaffRepository;
+use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,12 +16,12 @@ class AdminStaffController extends AbstractController
     /**
      * @Route("/admin/staff", name="admin_staff")
      */
-    public function staffAdmin(StaffRepository $staffRepository){
+    public function staffAdmin(ArticleRepository $articleRepository){
 
-        $staffs = $staffRepository->findBy([], ['id' => 'DESC'], 3);
+        $articles = $articleRepository->getArticlesByCat("staff", true);
 
         return $this->render('admin/staff.html.twig', [
-            'staffs' => $staffs
+            'articles' => $articles
         ]);
     }
 
@@ -30,16 +30,16 @@ class AdminStaffController extends AbstractController
      */
     public function createStaff(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger)
     {
-        $staffs = new Staff();
+        $article = new Article();
 
-        $form = $this->createForm(StaffType::class, $staffs);
+        $form = $this->createForm(StaffType::class, $article);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             // alors on enregistre l'article en bdd
-            $entityManager->persist($staffs);
+            $entityManager->persist($article);
             $entityManager->flush();
 
             $this->addFlash('success', 'Elément enregistré');
@@ -47,30 +47,32 @@ class AdminStaffController extends AbstractController
 
         return $this->render('admin/create_staff.html.twig', [
             'form' => $form->createView(),
-            'staffs' => $staffs
+            'article' => $article
         ]);
     }
 
     /**
      * @Route("/admin/staff/update/{id}", name="admin_update_staff")
      */
-    public function updateStaff($id, StaffRepository $staffRepository, Request $request, EntityManagerInterface $entityManager)
+    public function updateStaff($id, ArticleRepository $articleRepository, Request $request, EntityManagerInterface $entityManager)
     {
-        $staffs = $staffRepository->find($id);
+        $article = $articleRepository->find($id);
 
-        $form = $this->createForm(StaffType::class, $staffs);
+        $form = $this->createForm(StaffType::class, $article);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             // alors on enregistre l'article en bdd
-            $entityManager->persist($staffs);
+            $entityManager->persist($article);
             $entityManager->flush();
 
             $this->addFlash('success', 'Elément modifié');
         }
 
-        return $this->render("admin/staff.html.twig", ['form' => $form->createView(), 'staffs' => $staffs]);
+        return $this->render("admin/staff.html.twig", [
+            'form' => $form->createView(),
+            'article' => $article]);
     }
 }

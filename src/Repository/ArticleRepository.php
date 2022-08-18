@@ -5,7 +5,7 @@ namespace App\Repository;
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-
+use App\Repository\CategoryRepository;
 /**
  * @extends ServiceEntityRepository<Article>
  *
@@ -16,8 +16,10 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ArticleRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private CategoryRepository $categoryRepository;
+    public function __construct(ManagerRegistry $registry, CategoryRepository $categoryRepository)
     {
+        $this->categoryRepository = $categoryRepository;
         parent::__construct($registry, Article::class);
     }
 
@@ -37,6 +39,29 @@ class ArticleRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function getArticlesByCat(string $cat, bool $desc = false, int $limit = null): array
+    {
+        $orderByCriteria = null;
+        if($desc){
+            $orderByCriteria = ['id' => 'DESC'];
+        }
+        if($cat){
+            $catEntity = $this->categoryRepository->findOneBy(['name'=> $cat]);
+            return $this->findBy(['category'=>$catEntity], $orderByCriteria, $limit);
+        }
+
+        return $this->findAll();
+    }
+
+    public function getArticlesPicturesId() {
+        $query = $this->createQueryBuilder('a')
+            ->innerJoin('a.picture', 'p')
+            ->select('p.id')
+            ->where('a.picture is not null');
+
+        return $query->getQuery()->getSingleColumnResult();
     }
 
 //    /**

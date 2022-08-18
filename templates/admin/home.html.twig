@@ -5,20 +5,23 @@
 
     {#    La boucle permet d'afficher l'intégralité des articles #}
     {% for article in lastArticles %}
-        <div class="description_bar">
-            <article class="main_page">
-               <h1>{{ article.title }}</h1>
-               <p>{{ article.content }}</p>
+{#        {% for category in category %}#}
+            <div class="description_bar">
+                <article class="main_page">
+                    <h1>{{ article.title }}</h1>
+                    <p>{{ article.content }}</p>
 
-            </article>
-            <div class="lien_container">
-                <a class="btn_secondary" href="{{ path ('admin_update_article',{'id':article.id }) }}">Modifier cet article </a>
+                </article>
+                <div class="lien_container">
+                    <a class="btn_secondary" href="{{ path ('admin_update_article',{'id':article.id }) }}">Modifier cet article </a>
+                </div>
             </div>
-        </div>
+{#        {% endfor %}#}
     {% endfor %}
 
     <section class="image_container">
         {% for picture in picture %}
+
             <div class="image_box">
                 <img class="img_home" src="{{ asset('uploads/images/') ~ picture.name }}" alt="{{ picture.name }}">
 

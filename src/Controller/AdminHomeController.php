@@ -17,9 +17,9 @@ class AdminHomeController extends AbstractController
     // le return permet de le renvoyer au navigateur
     public function homeAdmin(ArticleRepository $articleRepository, PictureRepository $pictureRepository){
 
-        $lastArticles = $articleRepository->findBy([], ['id' => 'DESC'], 1);
+        $lastArticles = $articleRepository->getArticlesByCat("home",true, 1);
 
-        $picture = $pictureRepository->findBy([], ['id' => 'DESC'], 3);
+        $picture = $pictureRepository->getHomePictures();
 
         return $this->render('admin/home.html.twig', [
             'lastArticles' => $lastArticles,

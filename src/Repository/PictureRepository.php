@@ -16,8 +16,10 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PictureRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private ArticleRepository $articleRepository;
+    public function __construct(ManagerRegistry $registry, ArticleRepository $articleRepository)
     {
+        $this->articleRepository = $articleRepository;
         parent::__construct($registry, Picture::class);
     }
 
@@ -37,6 +39,21 @@ class PictureRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function getHomePictures(){
+        $allOtherPicturesId = $this->articleRepository->getArticlesPicturesId();
+
+        $query = $this->createQueryBuilder('p');
+        if($allOtherPicturesId){
+            $query = $query->where('p.id not in (:pics)')
+                ->setParameter('pics', $allOtherPicturesId);
+        }
+        $query = $query->orderBy('p.id', 'DESC')
+        ->setMaxResults(3);
+
+
+        return $query->getQuery()->getResult();
     }
 
 //    /**
