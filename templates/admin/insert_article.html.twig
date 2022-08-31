@@ -1,9 +1,11 @@
 {% extends 'Admin/base.html.twig' %}
 
 {% block main %}
-    {{ form_start(form) }}
-
-    {{ form(form) }}
-
-    {{ form_end(form) }}
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            {{ form_start(form) }}
+            {{ form(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}

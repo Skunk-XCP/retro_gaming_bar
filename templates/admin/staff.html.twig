@@ -18,18 +18,25 @@
 
 {% block main %}
 
+    <section class="staff_container">
     {% for article in articles %}
+
         <div class="description_staff">
+
             <article class="staff_page">
+
+                <img src="{{ asset('uploads/images/') ~ article.picture.name }}" alt="" class="profil_pic" width="300px" height="300px">
+
                 <h1>{{ article.title }}</h1>
                 <p>{{ article.content }}</p>
-                <img src="{{ asset('uploads/images/') ~ article.picture.name }}" alt="">
 
+                <div class="lien_container">
+                     <a class="btn_secondary" href="{{ path ('admin_insert_article',{'id':article.id }) }}">Modifier cet élément </a>
+                </div>
             </article>
-            <div class="lien">
-                <a href="{{ path ('admin_insert_article',{'id':article.id }) }}">Modifier cet élément </a>
-            </div>
         </div>
+
     {% endfor %}
+    </section>
 
 {% endblock %}

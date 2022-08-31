@@ -12,7 +12,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\PictureRepository;
 
 
-
 class AdminPictureController extends AbstractController
 {
 
@@ -21,9 +20,9 @@ class AdminPictureController extends AbstractController
      */
     public function insertPicture(PictureRepository $pictureRepository, Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger)
     {
-        $picture = new Picture();
+        $pictures = new Picture();
 
-        $form = $this->createForm(PictureType::class, $picture);
+        $form = $this->createForm(PictureType::class, $pictures);
 
         $form->handleRequest($request);
 
@@ -39,10 +38,10 @@ class AdminPictureController extends AbstractController
 
             $name->move($this->getParameter('images_directory'), $newFilename);
 
-            $picture->setName($newFilename);
+            $pictures->setName($newFilename);
 
             // alors on enregistre l'image en bdd
-            $entityManager->persist($picture);
+            $entityManager->persist($pictures);
             $entityManager->flush();
 
             $this->addFlash('success', 'Image enregistrée');
@@ -50,7 +49,7 @@ class AdminPictureController extends AbstractController
 
         return $this->render("admin/insert_picture.html.twig", [
             'form' => $form->createView(),
-            'picture' => $picture
+            'pictures' => $pictures
         ]);
     }
 
@@ -59,9 +58,9 @@ class AdminPictureController extends AbstractController
      */
     public function updatePicture($id, PictureRepository $pictureRepository, EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger)
     {
-        $picture = $pictureRepository->find($id);
+        $pictures = $pictureRepository->find($id);
 
-        $form = $this->createForm(PictureType::class, $picture);
+        $form = $this->createForm(PictureType::class, $pictures);
 
         // on donne à la variable qui contient le formulaire
         // une instance de la classe request
@@ -84,10 +83,10 @@ class AdminPictureController extends AbstractController
 
             $name->move($this->getParameter('images_directory'), $newFilename);
 
-            $picture->setName($newFilename);
+            $pictures->setName($newFilename);
 
             // alors on enregistre l'image en bdd
-            $entityManager->persist($picture);
+            $entityManager->persist($pictures);
             $entityManager->flush();
 
             $this->addFlash('success', 'Image enregistrée');
@@ -98,6 +97,25 @@ class AdminPictureController extends AbstractController
         // le résultat de la méthode createView de la variable $form
         return $this->render("admin/update_image.html.twig", [
             'form' => $form->createView(),
-            'picture' => $picture]);
+            'picture' => $pictures]);
+    }
+
+    /**
+     * Route("/admin/picture/delete/{id}", name="admin_delete_picture")
+     */
+
+    public function deletePicture($id, PictureRepository $pictureRepository, EntityManagerInterface $entityManager)
+    {
+        $pictures = $pictureRepository->find($id);
+
+        if (!is_null($pictures)){
+            $entityManager->remove($pictures);
+            $entityManager->flush();
+
+            $this->addFlash('success', "L'image a été supprimée");
+        }  else {
+
+            $this->addFlash('error', "Element introuvable");
+        }
     }
 }

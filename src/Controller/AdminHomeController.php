@@ -19,11 +19,11 @@ class AdminHomeController extends AbstractController
 
         $lastArticles = $articleRepository->getArticlesByCat("home",true, 1);
 
-        $picture = $pictureRepository->getHomePictures();
+        $pictures = $pictureRepository->getHomePictures();
 
         return $this->render('admin/home.html.twig', [
             'lastArticles' => $lastArticles,
-            'picture' => $picture
+            'pictures' => $pictures
         ]);
     }
 }

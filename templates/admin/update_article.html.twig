@@ -7,18 +7,15 @@
     mon formulaire depuis le controleur
     ça permet de générer tous les inputs + labels de mon formulaire
     #}
-    {{ form_start(form) }}
 
-    {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'form-article-title-label'}}) }}
-    {{ form_widget(form.title, {'attr': {'class': 'form-article-title-widget'}}) }}
-    {{ form_errors(form.title) }}
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            {{ form_start(form) }}
 
-    {{ form_label(form.content) }}
-    {{ form_widget(form.content) }}
-    {{ form_errors(form.content) }}
+            {{ form(form) }}
 
-    {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
-
-    {{ form_end(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
 
 {% endblock %}

@@ -2,6 +2,39 @@
 
 
 
+{% block header %}
+    <nav class="top_nav">
+        <a href="{{ path ('home') }}">
+            <span><img src="{{ asset ('../public/assets/images/logo_RGB_Final.png') }}" alt="logo RGB"></span>
+        </a>
+        <ul class="ul_nav">
+            <li class="li_nav"><a href="{{ path ('carte') }}" >La Carte</a></li>
+            <li class="li_nav"><a href="{{ path ('events') }}">Events</a></li>
+            <li class="li_nav"><a href="{{ path ('staff') }}" >Le Staff</a></li>
+            <li class="li_nav"><a href="{{ path ('faq') }}" >FAQ</a></li>
+        </ul>
+    </nav>
+{% endblock %}
+
+
 {% block main %}
-<p>PAGE DU STAFF</p>
+
+    <section class="staff_container"
+    {% for article in articles %}
+
+        <div class="description_staff">
+
+            <article class="staff_page">
+
+                <img src="{{ asset('uploads/images/') ~ article.picture.name }}" alt="" class="profil_pic" width="300px" height="300px">
+
+                <h1>{{ article.title }}</h1>
+                <p>{{ article.content }}</p>
+
+            </article>
+        </div>
+
+    {% endfor %}
+    </section>
+
 {% endblock %}

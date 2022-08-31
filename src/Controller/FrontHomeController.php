@@ -13,13 +13,13 @@ class FrontHomeController extends AbstractController
      */
     public function home(ArticleRepository $articleRepository, PictureRepository $pictureRepository){
 
-        $lastArticles = $articleRepository->findBy([], ['id' => 'DESC'], 1);
+        $lastArticles = $articleRepository->getArticlesByCat("home",true, 1);
 
-        $picture = $pictureRepository->findBy([], ['id' => 'DESC'], 3);
+        $pictures = $pictureRepository->getHomePictures();
 
         return $this->render('front/home.html.twig', [
             'lastArticles' => $lastArticles,
-            'picture' => $picture
+            'pictures' => $pictures
         ]);
     }
 }

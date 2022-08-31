@@ -34,7 +34,7 @@
     object-fit: contain;
 }
 
-/* MAIN */
+/* HOMEPAGE */
 .description_bar {
     text-align: center;
 }
@@ -72,16 +72,39 @@
     margin-top: 1%;
 }
 
+/* STAFF */
+
+.staff_container {
+    display: flex;
+    flex-wrap:  wrap;
+    align-items: center;
+    padding: 3rem 0;
+    justify-content: space-around;
+}
+
+.description_staff {
+    width: 33%;
+    text-align: center;
+}
+
+
+
+.profil_pic {
+    border: 2px solid black;
+    border-radius: 50%;
+    object-fit: contain;
+
+}
+
 
 .footer {
     display: flex;
-
     justify-content: center;
     background-color: black;
 }
 
 .ul_footer {
-    /*display: flex;*/
+    display: flex;
     text-align: center;
     list-style: none;
     text-decoration: none;
@@ -114,4 +137,8 @@
     border-radius: 5px;
     margin-top: 1%;
     padding: 5px 15px;
+}
+
+btn_lien_container {
+    display: flex;
 }

@@ -58,7 +58,9 @@ class AdminArticleController extends AbstractController
         // la méthode permet de récupérer un élément par rapport à son id
         $article = $articleRepository->find($id);
 
-        return $this->render("admin/article.html.twig", ['article' => $article]);
+        return $this->render("admin/article.html.twig", [
+            'article' => $article
+        ]);
     }
 
     /**
@@ -92,7 +94,10 @@ class AdminArticleController extends AbstractController
         // j'affiche mon twig, en lui passant la variable
         // form, qui contient la vue du formulaire, c'est à dire,
         // le résultat de la méthode createView de la variable $form
-        return $this->render("admin/update_article.html.twig", ['form' => $form->createView(), 'articles' => $articles]);
+        return $this->render("admin/update_article.html.twig", [
+            'form' => $form->createView(),
+            'articles' => $articles
+        ]);
     }
 
 

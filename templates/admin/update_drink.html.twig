@@ -7,28 +7,32 @@
     mon formulaire depuis le controleur
     ça permet de générer tous les inputs + labels de mon formulaire
     #}
-    {{ form_start(form) }}
 
-    {{ form_label(form.title, 'name', {'label_attr': {'class': 'form-drink-name-label'}}) }}
-    {{ form_widget(form.title, {'attr': {'class': 'form-drink-name-widget'}}) }}
-    {{ form_errors(form.title) }}
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            {{ form_start(form) }}
 
-    {{ form_label(form.description, 'description', {'label_attr': {'class': 'form-drink-description-label'}}) }}
-    {{ form_widget(form.description, {'attr': {'class': 'form-drink-description-widget'}}) }}
-    {{ form_errors(form.description) }}
+            {{ form_label(form.title, 'name', {'label_attr': {'class': 'form-drink-name-label'}}) }}
+            {{ form_widget(form.title, {'attr': {'class': 'form-drink-name-widget'}}) }}
+            {{ form_errors(form.title) }}
 
-
-    {% if picture.name %}
-        <img src="{{ asset('uploads/images/' ~ drink.picture)  }}" alt="{{ drink.name }}">
-    {% endif %}
+            {{ form_label(form.description, 'description', {'label_attr': {'class': 'form-drink-description-label'}}) }}
+            {{ form_widget(form.description, {'attr': {'class': 'form-drink-description-widget'}}) }}
+            {{ form_errors(form.description) }}
 
 
-    {{ form_label(form.content) }}
-    {{ form_widget(form.content) }}
-    {{ form_errors(form.content) }}
+            {% if picture.name %}
+                <img src="{{ asset('uploads/images/' ~ drink.picture)  }}" alt="{{ drink.name }}">
+            {% endif %}
 
-    {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
 
-    {{ form_end(form) }}
+            {{ form_label(form.content) }}
+            {{ form_widget(form.content) }}
+            {{ form_errors(form.content) }}
 
+            {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}
