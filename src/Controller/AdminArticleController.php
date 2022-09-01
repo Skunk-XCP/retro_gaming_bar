@@ -17,7 +17,7 @@ class AdminArticleController extends AbstractController
     /**
      * @Route ("/admin/insert-article", name="admin_insert_article")
      */
-    public function insertArticle(EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger)
+    public function insertArticle(EntityManagerInterface $entityManager, Request $request)
     {
 
         $articles = new Article();
@@ -47,11 +47,11 @@ class AdminArticleController extends AbstractController
     /**
      * @Route("/admin/article/{id}", name="admin_article")
      */
-    public function showArticle(ArticleRepository $articleRepository, $id)
+    public function showArticle($id, ArticleRepository $articleRepository)
     {
         // récupérer depuis la base de données un article
         // en fonction d'un ID
-        // donc SELECT * FROM article where id = xxx
+        // donc SELECT * FROM article where id = x
 
         // la classe Repository me permet de faire des requête SELECT
         // dans la table associé
