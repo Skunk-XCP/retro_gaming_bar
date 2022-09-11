@@ -8,7 +8,6 @@ use App\Form\ArticleType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\String\Slugger\SluggerInterface;
 use App\Repository\ArticleRepository;
 
 class AdminArticleController extends AbstractController
@@ -41,7 +40,8 @@ class AdminArticleController extends AbstractController
 
         return $this->render("admin/insert_article.html.twig", [
             'form' => $form->createView(),
-            'articles' => $articles]);
+            'articles' => $articles
+        ]);
     }
 
     /**
@@ -67,7 +67,7 @@ class AdminArticleController extends AbstractController
      * @Route("/admin/articles/update/{id}", name="admin_update_article")
      */
 
-    public function updateArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager, Request $request, SluggerInterface $slugger)
+    public function updateArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager, Request $request)
     {
         $articles = $articleRepository->find($id);
 
@@ -100,5 +100,23 @@ class AdminArticleController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/admin/articles/delete/{id}", name="admin_delete_article")
+     */
+    public function deleteArticle($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
+    {
+        $article = $articleRepository->find($id);
 
+        if (!is_null($article)) {
+
+            $entityManager->remove($article);
+            $entityManager->flush();
+
+            $this->addFlash('success', "L'article a été supprimé");
+            return $this->redirectToRoute('admin_article_list');
+        } else {
+
+            $this->addFlash('error', "Element introuvable");
+        }
+    }
 }

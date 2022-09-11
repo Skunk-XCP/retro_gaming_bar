@@ -1,7 +1,38 @@
 {% extends 'admin/base.html.twig' %}
 
 
+{% block header %}
+    <nav class="top_nav">
+        <a href="{{ path ('admin_home') }}">
+            <span><img src="{{ asset ('../public/assets/images/logo_RGB_Final.png') }}" alt="logo RGB"></span>
+        </a>
+        <ul class="ul_nav">
+            <li class="li_nav"><a href="{{ path ('admin_carte') }}" >La Carte</a></li>
+            <li class="li_nav"><a href="{{ path ('admin_events') }}">Events</a></li>
+            <li class="li_nav"><a href="{{ path ('admin_staff') }}" >Le Staff</a></li>
+            <li class="li_nav"><a href="{{ path ('admin_faq') }}" >FAQ</a></li>
+        </ul>
+    </nav>
+{% endblock %}
+
 
 {% block main %}
-    <p>PAGE DE LA FAQ ADMIN</p>
+
+    {% for question in questions %}
+        <div class="faq">
+            <article class="faq_page">
+                <h2>{{ question.question }}</h2>
+                <p>{{ question.answer }}</p>
+            </article>
+
+            <div class="lien_container">
+                <a class="btn_secondary" href="{{ path ('admin_update_question',{'id':question.id }) }}">Modifier cette question </a>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
+
+{% block footer %}
+
 {% endblock %}

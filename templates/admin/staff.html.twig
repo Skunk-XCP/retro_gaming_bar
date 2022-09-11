@@ -27,7 +27,7 @@
 
                 <img src="{{ asset('uploads/images/') ~ article.picture.name }}" alt="" class="profil_pic" width="300px" height="300px">
 
-                <h1>{{ article.title }}</h1>
+                <h2>{{ article.title }}</h2>
                 <p>{{ article.content }}</p>
 
                 <div class="lien_container">
@@ -38,5 +38,9 @@
 
     {% endfor %}
     </section>
+
+{% endblock %}
+
+{% block footer %}
 
 {% endblock %}

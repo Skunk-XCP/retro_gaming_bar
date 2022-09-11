@@ -72,6 +72,15 @@
     margin-top: 1%;
 }
 
+/* FAQ */
+.faq {
+    margin: 2% 0;
+}
+.faq_page {
+    text-align: center;
+    margin-left:  10vw;
+    margin-right:  10vw;
+}
 /* STAFF */
 
 .staff_container {
@@ -101,6 +110,7 @@
     display: flex;
     justify-content: center;
     background-color: black;
+    margin-bottom: 0;
 }
 
 .ul_footer {
@@ -121,6 +131,11 @@
     text-decoration: none;
 }
 
+/* FORMULAIRE UPDATE */
+.formtype {
+    margin: 10% 0;
+}
+
 /* formulaire insert image */
 .toto {
     display: flex;
@@ -139,6 +154,88 @@
     padding: 5px 15px;
 }
 
-btn_lien_container {
-    display: flex;
+/*btn_lien_container {*/
+/*    display: flex;*/
+/*}*/
+
+
+.burger {
+    display: none;
+}
+
+@media screen and (max-width:768px) {
+
+    .ul_nav {
+        overflow:hidden;
+        display:flex;
+        flex-direction:column;
+        width:0;
+        height:calc(100vh - 65px);
+        position:absolute;
+        top:65px;
+        right:0;
+        transform: translateX(110%);
+        transition: all .5s ease-in-out;
+    }
+
+    .show-nav .ul_nav {
+        width:100vw;
+        transform: translateX(0);
+    }
+
+    .li_nav > a {
+        display:block;
+        padding:1rem;
+        font-size:1.6rem;
+        transition: all .4s ease-in-out;
+    }
+
+    .li_nav > a:hover {
+        padding-left:2rem;
+        letter-spacing:5px;
+    }
+
+    /* visuel bouton burger */
+
+    .li_nav > a::after {
+        display:block;
+        content:"";
+        width:0;
+        height:1px;
+        transition:width .4s;
+        color: red;
+
+    }
+
+    .burger {
+        display:block;
+        position:relative;
+        padding:0;
+        width:45px;
+        height:45px;
+        border:none;
+        background:white;
+        cursor:pointer;
+        color: red;
+    }
+
+    .bar {
+        display:block;
+        width:45px;
+        height:4px;
+        border-radius:3px;
+        transition: all .5s ease-in-out;
+        color: red;
+    }
+
+    .bar::before, .bar::after {
+        content:"";
+        width:45px;
+        height:4px;
+        position:absolute;
+        left:0;
+        border-radius:3px;
+        transition: all .5s ease-in-out;
+        color: red;
+    }
 }
